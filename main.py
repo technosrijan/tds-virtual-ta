@@ -93,6 +93,10 @@ async def extract_text_from_image(image_base64: str) -> str:
 def root():
     return {"message": "TDS Virtual TA is running."}
 
+@app.get("/api/")
+def root_api():
+    return {"message": "TDS Virtual TA is running."}
+
 # === Main Endpoint ===
 # === Main Endpoint ===
 @app.post("/api/", response_model=TAResponse)
