@@ -6,6 +6,7 @@ import json
 from typing import Optional, List
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from PIL import Image
 from openai import OpenAI
@@ -24,6 +25,13 @@ EMBED_MODEL = "text-embedding-3-small"
 # === FastAPI Setup ===
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # === Clients ===
 ocr_client = ComputerVisionClient(AZURE_ENDPOINT, CognitiveServicesCredentials(AZURE_KEY))
 
