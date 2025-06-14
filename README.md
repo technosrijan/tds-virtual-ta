@@ -11,6 +11,14 @@
 
 ---
 
+## 🌐 Public API Access
+
+The API is now **publicly live** and accessible at:
+
+**[https://tds-virtual-ta-jue2.onrender.com/api/](https://tds-virtual-ta-jue2.onrender.com/api/)**
+
+---
+
 ## ✨ Key Features
 
 - 🔎 **Semantic Search** across both course content and Discourse forum threads  
@@ -127,6 +135,9 @@ Visit: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 POST /api/
 ```
 
+Or use the public endpoint:  
+**[https://tds-virtual-ta-jue2.onrender.com/api/](https://tds-virtual-ta-jue2.onrender.com/api/)**
+
 ### Request
 
 ```json
@@ -136,7 +147,7 @@ POST /api/
 }
 ```
 
-or with image:
+Or with image:
 
 ```json
 {
@@ -187,4 +198,4 @@ or with image:
 
 ## 📄 License
 
-This project is licensed under the MIT License. See
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
