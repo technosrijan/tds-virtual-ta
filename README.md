@@ -60,79 +60,94 @@
         └────┬─────────┘
              ▼
      Final Answer + Links
+```
 
+---
 
-⸻
+## 🚀 How It Works
 
-🚀 How It Works
-	1.	Data Collection
-	•	Discourse Scraping: Authenticated via session cookies to pull all forum posts/topics into a JSON file.
-	•	Course Scraping: Downloaded official course pages in Markdown format.
-	2.	Preprocessing & Indexing
-	•	Chunked each post/page.
-	•	Created embeddings using text-embedding-3-small via AI Pipe.
-	•	Stored all chunks in a ChromaDB collection with metadata (URLs).
-	3.	Query Flow
-	•	Accepts a text question plus optional base64-encoded image.
-	•	Uses Azure OCR to extract text from the image.
-	•	Embeds the final query and retrieves the top 2 chunks from ChromaDB.
-	•	Feeds retrieved snippets into Groq’s LLaMA 3 model to generate a natural-language answer with relevant links.
+1. **Data Collection**
+    - **Discourse Scraping:** Authenticated via session cookies to pull all forum posts/topics into a JSON file.
+    - **Course Scraping:** Downloaded official course pages in Markdown format.
+2. **Preprocessing & Indexing**
+    - Chunked each post/page.
+    - Created embeddings using `text-embedding-3-small` via AI Pipe.
+    - Stored all chunks in a ChromaDB collection with metadata (URLs).
+3. **Query Flow**
+    - Accepts a text question plus optional base64-encoded image.
+    - Uses Azure OCR to extract text from the image.
+    - Embeds the final query and retrieves the top 2 chunks from ChromaDB.
+    - Feeds retrieved snippets into Groq’s LLaMA 3 model to generate a natural-language answer with relevant links.
 
-⸻
+---
 
-📦 Setup Instructions
+## 📦 Setup Instructions
 
-Prerequisites
-	•	Python 3.9+
-	•	Azure Computer Vision credentials
-	•	AI Pipe & Groq API keys
+### Prerequisites
 
-Installation
+- Python 3.9+
+- Azure Computer Vision credentials
+- AI Pipe & Groq API keys
 
+### Installation
+
+```bash
 git clone https://github.com/technosrijan/tds-virtual-ta.git
 cd tds-virtual-ta
 python3 -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+source .venv/bin/activate   # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+```
 
-Environment Variables
+### Environment Variables
 
-Create a .env in the project root:
+Create a `.env` file in the project root:
 
+```env
 AZURE_KEY=your_azure_computer_vision_key
 GROQ_KEY=your_groq_api_key
 AIPIPE_KEY=your_aipipe_api_key
+```
 
-Run the API
+### Run the API
 
+```bash
 uvicorn main:app --reload
+```
 
-Visit: http://127.0.0.1:8000
+Visit: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-⸻
+---
 
-📨 API Usage
+## 📨 API Usage
 
-Endpoint
+### Endpoint
 
+```
 POST /api/
+```
 
-Request
+### Request
 
+```json
 {
   "question": "What is the difference between PCA and t-SNE?",
   "image": null
 }
+```
 
-or with image
+or with image:
 
+```json
 {
   "question": "Explain the text in this image",
   "image": "<base64_string>"
 }
+```
 
-Response
+### Response
 
+```json
 {
   "answer": "PCA and t-SNE are both dimensionality reduction techniques, but ...",
   "links": [
@@ -146,28 +161,30 @@ Response
     }
   ]
 }
+```
 
+---
 
-ℹ️ Notes on Evaluation
-	•	One of the sample test cases (project-tds-virtual-ta-promptfoo.yaml) fails because it references a Discourse post created after April 14, 2025, which lies outside the scraped training data window.
-	•	This behavior is expected and intentional: the application does not hallucinate responses for unseen data. Instead, it accurately avoids guessing when no relevant context is available.
-	•	All other test cases pass successfully with high-quality context-aware answers.
+## ℹ️ Notes on Evaluation
 
+- One of the sample test cases (`project-tds-virtual-ta-promptfoo.yaml`) fails because it references a Discourse post created after April 14, 2025, which lies outside the scraped training data window.
+- This behavior is expected and intentional: the application does not hallucinate responses for unseen data. Instead, it accurately avoids guessing when no relevant context is available.
+- All other test cases pass successfully with high-quality context-aware answers.
 
 ✅ All project requirements, deployment steps, and bonus features have been implemented as per the TDS Virtual TA specification.
 
-⸻
+---
 
-🎯 Learning Outcomes
-	•	Authenticated API scraping & parsing (Discourse + website)
-	•	Semantic chunking & vector store management (ChromaDB)
-	•	LLM summarization pipelines (Groq LLaMA 3)
-	•	Image-to-text enhancement via OCR (Azure)
-	•	Building & deploying a production-ready FastAPI application
+## 🎯 Learning Outcomes
 
-⸻
+- Authenticated API scraping & parsing (Discourse + website)
+- Semantic chunking & vector store management (ChromaDB)
+- LLM summarization pipelines (Groq LLaMA 3)
+- Image-to-text enhancement via OCR (Azure)
+- Building & deploying a production-ready FastAPI application
 
-📄 License
+---
 
-This project is licensed under the MIT License. See LICENSE for details.
+## 📄 License
 
+This project is licensed under the MIT License. See
