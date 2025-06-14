@@ -16,7 +16,7 @@ from chromadb import PersistentClient
 
 # === CONFIG ===
 AZURE_ENDPOINT = "https://tds-ocr.cognitiveservices.azure.com/"
-AZURE_KEY = os.getenv("AZURE_KEY") or "C4fBNHpG58pE4XrzFWxrBf0e39VrHuS93FpsYSEKcr20A2rtuwIFJQQJ99BFACGhslBXJ3w3AAAFACOG2E9S"
+AZURE_KEY = os.getenv("AZURE_KEY")
 CHROMA_PATH = "chroma_dbs/course_files"
 CHROMA_COLLECTION_NAME = "course"
 EMBED_MODEL = "text-embedding-3-small"
@@ -33,7 +33,7 @@ groq_client = OpenAI(
 )
 
 embedding_client = OpenAI(
-    api_key="eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjIwMDI4MzVAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.8f0ahsLOpfdJ_L1umGRysx-qGh8azZ8GJycCMJ36Xfg",
+    api_key=os.getenv("AIPIPE_KEY"),
     base_url="https://aipipe.org/openai/v1"
 )
 
@@ -94,6 +94,7 @@ def root():
     return {"message": "TDS Virtual TA is running."}
 
 # === Main Endpoint ===
+# === Main Endpoint ===
 @app.post("/api/", response_model=TAResponse)
 async def virtual_ta(input: QuestionInput):
     total_start = time.time()
@@ -110,6 +111,13 @@ async def virtual_ta(input: QuestionInput):
     embedded_query = embed_text(question_text)
     results = collection.query(query_embeddings=[embedded_query], n_results=2)
     embed_end = time.time()
+
+    if not results['documents'] or not results['documents'][0]:
+        print("[WARNING] No relevant documents found in ChromaDB.")
+        return TAResponse(
+            answer="Sorry, I couldn't find any relevant information in the course materials.",
+            links=[]
+        )
 
     documents = results['documents'][0]
     metadatas = results['metadatas'][0]
@@ -149,4 +157,5 @@ Context:
         return TAResponse(**parsed)
     except Exception as e:
         print("[JSON PARSE ERROR]", e)
+        print("[RAW LLM RESPONSE]", response.choices[0].message.content)
         return TAResponse(answer="Answer generation failed.", links=[])
