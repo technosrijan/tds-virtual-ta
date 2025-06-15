@@ -23,7 +23,7 @@ defaultTest:
         method: POST
         headers:
           Content-Type: application/json
-          Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjIwMDI4MzVAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.amzYhOuugrARi057C8OYS22k8RYfFP611zrHdJQHacg
+          Authorization: Bearer ${AIPROXY_KEY}
         body: |
           {
             "model": "gpt-4o-mini",
