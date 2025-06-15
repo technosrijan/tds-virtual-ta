@@ -11,6 +11,16 @@
 
 ---
 
+## 🌐 Simple Front-end UI For Easy Access
+
+To make the TDS Virtual TA easier to use, I built a lightweight Streamlit frontend available at:
+
+**🔗 [https://tds-virtual-ta-frontend.onrender.com/](https://tds-virtual-ta-frontend.onrender.com/)**
+
+You can use it to ask questions or upload related images (like slides or screenshots), and get structured answers instantly — no need to call the API manually.
+
+---
+
 ## 🌐 Public API Access
 
 The API is now **publicly live** and accessible at:
