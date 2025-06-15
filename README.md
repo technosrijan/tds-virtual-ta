@@ -7,7 +7,7 @@
 
 ## 🔍 Project Overview
 
-**TDS Virtual TA** is an intelligent question-answering API designed to help students interactively query course materials and forum discussions from the *Tools in Data Science* course offered by IIT Madras. It uses vector embeddings, semantic search, OCR, and a large-language model to generate human-readable answers to both text- and image-based queries.
+**TDS Virtual TA** is an RAG-based intelligent question-answering API designed to help students interactively query course materials and forum discussions from the *Tools in Data Science* course offered by IIT Madras. It uses vector embeddings, semantic search, OCR, and a large-language model to generate human-readable answers to both text- and image-based queries.
 
 ---
 

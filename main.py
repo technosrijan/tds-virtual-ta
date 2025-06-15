@@ -14,6 +14,9 @@ from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 from msrest.authentication import CognitiveServicesCredentials
 from chromadb import PersistentClient
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # === CONFIG ===
 AZURE_ENDPOINT = "https://tds-ocr.cognitiveservices.azure.com/"
