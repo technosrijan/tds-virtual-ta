@@ -100,7 +100,7 @@ async def extract_text_from_image(image_base64: str) -> str:
         print(f"[OCR ERROR] {e}")
         return ""
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 def root():
     return {"message": "TDS Virtual TA is running."}
 
